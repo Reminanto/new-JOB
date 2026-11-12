@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Add Follow-up | JobTrack{% endblock %}
+{% block content %}
+<div class="form-card">
+    <h2 class="fw-bold mb-1">Add follow-up</h2>
+    <p class="text-muted mb-4">{{ job['company_name'] }} — {{ job['job_role'] }}</p>
+    <form method="POST">
+        <div class="mb-3">
+            <label class="form-label">Follow-up date *</label>
+            <input type="date" name="followup_date" class="form-control" required>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Reminder notes</label>
+            <textarea name="description" rows="3" class="form-control" placeholder="e.g. Email HR to ask for an update"></textarea>
+        </div>
+        <button class="btn btn-primary">Save reminder</button>
+        <a href="{{ url_for('applications') }}" class="btn btn-outline-secondary">Cancel</a>
+    </form>
+</div>
+{% endblock %}

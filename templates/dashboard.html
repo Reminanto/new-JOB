@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | JobTrack{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+    <div>
+        <h2 class="fw-bold mb-1">Dashboard</h2>
+        <p class="text-muted mb-0">Here is your job search at a glance.</p>
+    </div>
+    <a href="{{ url_for('add_job') }}" class="btn btn-primary">+ Add application</a>
+</div>
+
+<div class="row g-3 mb-4">
+    <div class="col-6 col-lg-3"><div class="stat-card"><p>Total applications</p><h2>{{ total }}</h2></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><p>Interviews</p><h2>{{ counts['Interview'] }}</h2></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><p>Selected</p><h2>{{ counts['Selected'] }}</h2></div></div>
+    <div class="col-6 col-lg-3"><div class="stat-card"><p>Selection rate</p><h2>{{ success_rate }}%</h2></div></div>
+</div>
+
+<div class="row g-4">
+    <div class="col-lg-7">
+        <div class="content-card h-100">
+            <h5 class="fw-bold mb-3">Application status</h5>
+            {% for name, count in counts.items() %}
+                {% set percent = (count / total * 100) if total else 0 %}
+                <div class="mb-3">
+                    <div class="d-flex justify-content-between small mb-1"><span>{{ name }}</span><strong>{{ count }}</strong></div>
+                    <div class="progress"><div class="progress-bar" style="width: {{ percent }}%"></div></div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="col-lg-5">
+        <div class="content-card h-100">
+            <h5 class="fw-bold mb-3">Upcoming follow-ups</h5>
+            {% if upcoming %}
+                {% for item in upcoming %}
+                    <div class="border-bottom py-2">
+                        <strong>{{ item['company_name'] }}</strong>
+                        <div class="small text-muted">{{ item['job_role'] }} · {{ item['followup_date'] }}</div>
+                        {% if item['description'] %}<div class="small">{{ item['description'] }}</div>{% endif %}
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p class="text-muted mb-0">No upcoming follow-ups. Add a reminder from an application.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<div class="content-card mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h5 class="fw-bold mb-0">Recent applications</h5>
+        <a href="{{ url_for('applications') }}">View all</a>
+    </div>
+    {% if recent_jobs %}
+    <div class="table-responsive">
+        <table class="table align-middle">
+            <thead><tr><th>Company</th><th>Role</th><th>Applied date</th><th>Status</th></tr></thead>
+            <tbody>
+            {% for job in recent_jobs %}
+                <tr>
+                    <td>{{ job['company_name'] }}</td>
+                    <td>{{ job['job_role'] }}</td>
+                    <td>{{ job['applied_date'] }}</td>
+                    <td><span class="status-pill">{{ job['status'] }}</span></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% else %}
+        <p class="text-muted mb-0">No applications yet. Click “Add application” to get started.</p>
+    {% endif %}
+</div>
+{% endblock %}

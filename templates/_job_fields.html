@@ -1,0 +1,35 @@
+<div class="row g-3">
+    <div class="col-md-6">
+        <label class="form-label">Company name *</label>
+        <input name="company_name" class="form-control" value="{{ job['company_name'] if job else '' }}" required>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Job role *</label>
+        <input name="job_role" class="form-control" value="{{ job['job_role'] if job else '' }}" required>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Application date *</label>
+        <input type="date" name="applied_date" class="form-control" value="{{ job['applied_date'] if job else today }}" required>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Application status</label>
+        <select name="status" class="form-select">
+            {% for item in ['Applied', 'Assessment', 'Interview', 'Selected', 'Rejected', 'On Hold'] %}
+                <option value="{{ item }}" {% if job and job['status'] == item %}selected{% elif not job and item == 'Applied' %}selected{% endif %}>{{ item }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Location</label>
+        <input name="location" class="form-control" value="{{ job['location'] if job else '' }}" placeholder="e.g. Chennai / Remote">
+    </div>
+    <div class="col-md-6">
+        <label class="form-label">Expected salary (annual)</label>
+        <input type="number" min="0" step="0.01" name="salary" class="form-control" value="{{ job['salary'] if job and job['salary'] is not none else '' }}" placeholder="e.g. 400000">
+    </div>
+    <div class="col-12">
+        <label class="form-label">Notes</label>
+        <textarea name="notes" rows="3" class="form-control" placeholder="Recruiter details, interview notes, etc.">{{ job['notes'] if job else '' }}</textarea>
+    </div>
+</div>
+<div class="my-3"></div>

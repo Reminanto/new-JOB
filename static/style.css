@@ -1,0 +1,84 @@
+body {
+    background: #f5f7fb;
+    color: #1e293b;
+    font-family: Arial, sans-serif;
+}
+.app-navbar {
+    background: #172554;
+}
+.navbar-brand {
+    letter-spacing: .3px;
+}
+.auth-wrap {
+    min-height: 82vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.auth-card, .form-card {
+    background: white;
+    width: 100%;
+    max-width: 480px;
+    padding: 32px;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(15, 23, 42, .08);
+}
+.form-card {
+    max-width: 760px;
+    margin: 0 auto;
+}
+.brand-mark {
+    width: 58px;
+    height: 58px;
+    margin: auto;
+    border-radius: 16px;
+    background: #2563eb;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.stat-card, .content-card {
+    background: white;
+    border-radius: 14px;
+    padding: 20px;
+    box-shadow: 0 4px 18px rgba(15, 23, 42, .05);
+}
+.stat-card p {
+    color: #64748b;
+    margin-bottom: 8px;
+}
+.stat-card h2 {
+    font-weight: 700;
+    margin: 0;
+}
+.progress {
+    height: 9px;
+    background: #e8edf5;
+}
+.progress-bar {
+    background: #2563eb;
+}
+.status-pill {
+    display: inline-block;
+    background: #eaf1ff;
+    color: #1d4ed8;
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.form-control, .form-select {
+    border-color: #dbe2ea;
+    padding: 10px 12px;
+}
+a {
+    text-decoration: none;
+}
+@media (max-width: 576px) {
+    .auth-card, .form-card {
+        padding: 22px;
+    }
+}
